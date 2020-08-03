@@ -177,6 +177,10 @@ GameObject:
   - component: {fileID: 88199758}
   - component: {fileID: 88199760}
   - component: {fileID: 88199756}
+  - component: {fileID: 88199763}
+  - component: {fileID: 88199762}
+  - component: {fileID: 88199761}
+  - component: {fileID: 88199757}
   m_Layer: 0
   m_Name: ROS Connector
   m_TagString: Untagged
@@ -196,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae1d8da5a3c0644bb98a540ca597dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /joint_states
+  Topic: /ur3/joint_states
   JointStateReaders:
   - {fileID: 622603778}
   - {fileID: 1416849835}
@@ -205,6 +209,21 @@ MonoBehaviour:
   - {fileID: 455455547}
   - {fileID: 1429706590}
   FrameId: Unity
+--- !u!114 &88199757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88199755}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ebd11bc21d23224f82f278a59309cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /ur3/joint_jog
+  TimeStep: 0
+  controller: {fileID: 582426148}
 --- !u!114 &88199758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +266,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9525a60fee28d7e46802b9db1380b9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &88199761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88199755}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53083947b8a50c84a86a5012df5a054e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /ur3/follow_joint_traj
+  TimeStep: 0
+  controller: {fileID: 582426148}
+--- !u!114 &88199762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88199755}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ef86390bc39de488b7c6ebddcaca08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /ur3/estop
+  TimeStep: 0
+  controller: {fileID: 582426148}
+--- !u!114 &88199763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88199755}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa23b622c60c13f48bdfa74b2e974f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /ur3/base
+  PublishedTransform: {fileID: 582426147}
+  FrameId: Unity
 --- !u!1 &110610130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,8 +1179,8 @@ HingeJoint:
   m_ConnectedAnchor: {x: -0.08505, y: -1.4210855e-14, z: -0.00000013411046}
   m_UseSpring: 1
   m_Spring:
-    spring: 500
-    damper: 0.5
+    spring: 5000
+    damper: 50
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
@@ -1603,8 +1667,8 @@ HingeJoint:
   m_ConnectedAnchor: {x: 0, y: 0.21325035, z: 0}
   m_UseSpring: 1
   m_Spring:
-    spring: 500
-    damper: 0.5
+    spring: 5000
+    damper: 50
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
@@ -2036,13 +2100,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582426145}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 493675479}
   - {fileID: 941970825}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &582426148
 MonoBehaviour:
@@ -2269,8 +2333,8 @@ HingeJoint:
   m_ConnectedAnchor: {x: 0, y: 0.1519, z: 0}
   m_UseSpring: 1
   m_Spring:
-    spring: 500
-    damper: 0.5
+    spring: 5000
+    damper: 50
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
@@ -2932,7 +2996,7 @@ Rigidbody:
   m_Drag: 0.5
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -3827,7 +3891,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1338604394}
   m_LocalRotation: {x: 0.098410234, y: 0.7002253, z: -0.098410234, w: 0.7002253}
-  m_LocalPosition: {x: -1.058, y: 0.439, z: -0.011}
+  m_LocalPosition: {x: -1.058, y: 1, z: -0.011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3988,8 +4052,8 @@ HingeJoint:
   m_ConnectedAnchor: {x: -0.1198, y: 0, z: 0}
   m_UseSpring: 1
   m_Spring:
-    spring: 500
-    damper: 0.5
+    spring: 5000
+    damper: 50
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
@@ -4151,8 +4215,8 @@ HingeJoint:
   m_ConnectedAnchor: {x: 0, y: 0.0853501, z: -0.00000014156103}
   m_UseSpring: 1
   m_Spring:
-    spring: 500
-    damper: 0.5
+    spring: 5000
+    damper: 50
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
@@ -5315,8 +5379,8 @@ HingeJoint:
   m_ConnectedAnchor: {x: 0.0925, y: 0.24365012, z: 0}
   m_UseSpring: 1
   m_Spring:
-    spring: 500
-    damper: 0.5
+    spring: 5000
+    damper: 50
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
@@ -5888,7 +5952,7 @@ Transform:
   m_LocalScale: {x: 10, y: 0.2, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2126117465
 GameObject:
