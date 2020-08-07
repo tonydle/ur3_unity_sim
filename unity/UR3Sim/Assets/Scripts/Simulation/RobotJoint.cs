@@ -111,7 +111,8 @@ namespace Robot
             float temp_position;
             if(_pid_control) {
                 _speed = _desired_velocity;
-                _pos_pid_cur_err = _desired_position - _position;
+                temp_position = _position + _speed*Time.fixedDeltaTime;
+                _pos_pid_cur_err = _desired_position - temp_position;
                 _pos_pid_sum_err += _pos_pid_cur_err;
                 float _pos_pid_dif_err = _pos_pid_cur_err - _pos_pid_pre_err;
                 
@@ -119,9 +120,13 @@ namespace Robot
                 // Calculate speed again
                 _speed += _pos_pid_kp*_pos_pid_cur_err + _pos_pid_ki*_pos_pid_sum_err*Time.fixedDeltaTime + _pos_pid_kd*(_pos_pid_dif_err/Time.fixedDeltaTime);
                 _pos_pid_pre_err = _pos_pid_cur_err;
+                temp_position = _position + _speed*Time.fixedDeltaTime;
             }
-            temp_position = _position + _speed*Time.fixedDeltaTime;
-
+            else
+            {
+                temp_position = _position + _speed*Time.fixedDeltaTime;
+            }
+            
             if(temp_position >= _limit_max) {
                 if(_continuous) {
                     temp_position = _limit_min + (temp_position - _limit_max);

@@ -36,12 +36,12 @@ trajPub.InitPublisher(steps);
 %% 3b. Creating and sending a trajectory
 % Getting the current joint angles and creating a trajectory
 time = 2.0; % seconds
-deltaTheta = deg2rad(-30)/steps;                % we are rotating each joint -30 degrees
+deltaTheta = deg2rad(-90)/steps;                % we are rotating each joint -90 degrees
 jointAngles = statusUpdater.getJointStates();   % get the current joint positions
 qMatrix = nan(steps,6);                         % this is our trajectory
 qMatrix(1,:) = jointAngles;                     % we are starting from the current position
 for i = 2:steps
-    qMatrix(i,:) = qMatrix(i-1,:) + deltaTheta;
+    qMatrix(i,:) = qMatrix(i-1,2) + deltaTheta;
 end
 velMatrix = zeros(steps,6);                     % the velocity Matrix
 deltaT = time/steps;

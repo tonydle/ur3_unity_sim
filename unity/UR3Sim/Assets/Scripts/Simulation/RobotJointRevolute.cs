@@ -7,6 +7,8 @@ namespace Robot
     public class RobotJointRevolute : RobotJoint
     {
         public float InitialPosition;
+        public float limitMax;
+        public float limitMin;
         private RosSharp.HingeJointLimitsManager _hinge_joint_limits;
         private HingeJoint _hinge_joint;
 
@@ -14,13 +16,8 @@ namespace Robot
         {
             _continuous = false;
             _joint_type = "revolute";
-            _hinge_joint_limits = GetComponent(typeof(RosSharp.HingeJointLimitsManager)) as RosSharp.HingeJointLimitsManager;
             _hinge_joint = GetComponent(typeof(HingeJoint)) as HingeJoint;
-
-            // _hinge_joint_limits.LargeAngleLimitMin += offset;
-            // _hinge_joint_limits.LargeAngleLimitMax += offset;
-
-            setLimits(_hinge_joint_limits.LargeAngleLimitMin, _hinge_joint_limits.LargeAngleLimitMax);
+            setLimits(limitMin, limitMax);
             setPosition(InitialPosition);
         }
 

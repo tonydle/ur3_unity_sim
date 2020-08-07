@@ -7,6 +7,8 @@ namespace Robot
     public class RobotJointPrismatic : RobotJoint
     {
         public float InitialPosition;
+        public float limitMax;
+        public float limitMin;
         private RosSharp.PrismaticJointLimitsManager _pris_joint_limits;
         private ConfigurableJoint _config_joint;
 
@@ -14,13 +16,8 @@ namespace Robot
         {
             _continuous = false;
             _joint_type = "prismatic";
-            _pris_joint_limits = GetComponent(typeof(RosSharp.PrismaticJointLimitsManager)) as RosSharp.PrismaticJointLimitsManager;
             _config_joint = GetComponent(typeof(ConfigurableJoint)) as ConfigurableJoint;
-
-            // _pris_joint_limits.PositionLimitMin += offset;
-            // _pris_joint_limits.PositionLimitMax += offset;
-
-            setLimits(_pris_joint_limits.PositionLimitMin, _pris_joint_limits.PositionLimitMax);
+            setLimits(limitMin, limitMax);
             setPosition(InitialPosition);
         }
 

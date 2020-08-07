@@ -28,7 +28,19 @@ namespace RosSharp.RosBridgeClient
                 position = urdfJoint.GetPosition() + _robot_joint.offset;
             }
             else {
-                position = urdfJoint.GetPosition() + _robot_joint.offset*Mathf.Deg2Rad;
+                position = urdfJoint.GetPosition();
+                float robotJointPosition = -(_robot_joint.getPosition()) * Mathf.Deg2Rad; 
+                if (position - robotJointPosition > Mathf.PI)
+                {
+                    while (position - robotJointPosition > Mathf.PI)
+                        position -= 2*Mathf.PI;
+                }
+                else if (position - robotJointPosition < -Mathf.PI)
+                {
+                    while (position - robotJointPosition < -Mathf.PI)
+                        position += 2*Mathf.PI;
+                }
+                position += _robot_joint.offset*Mathf.Deg2Rad;
             }
             
             velocity = urdfJoint.GetVelocity();
