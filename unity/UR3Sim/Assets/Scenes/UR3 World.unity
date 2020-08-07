@@ -1418,7 +1418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1728607464}
-  FPSController: {fileID: 1689229979}
+  fpsController: {fileID: 1689229979}
 --- !u!1 &379571429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,7 +1545,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.08535004, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 0.085350096, z: 0}
   m_UseSpring: 1
   m_Spring:
     spring: 5000
@@ -1770,7 +1770,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.21325023, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 0.2132503, z: 0}
   m_UseSpring: 1
   m_Spring:
     spring: 5000
@@ -4332,7 +4332,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0925, y: 0.24365002, z: 0}
+  m_ConnectedAnchor: {x: 0.0925, y: 0.24365008, z: 0}
   m_UseSpring: 1
   m_Spring:
     spring: 5000
@@ -4918,7 +4918,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.15190005, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 0.1519, z: 0}
   m_UseSpring: 1
   m_Spring:
     spring: 5000
@@ -6584,7 +6584,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.08505, y: 0.000000014901161, z: 0}
+  m_ConnectedAnchor: {x: -0.08505, y: 0.000000074505806, z: 0}
   m_UseSpring: 1
   m_Spring:
     spring: 5000
@@ -6792,7 +6792,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.1198, y: 0.000000059604645, z: 0}
+  m_ConnectedAnchor: {x: -0.1198, y: 0, z: 0}
   m_UseSpring: 1
   m_Spring:
     spring: 5000
