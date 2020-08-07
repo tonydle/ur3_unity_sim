@@ -7,7 +7,7 @@ namespace Robot
 { 
     public class JointJog
     {
-        public List<string> joint_names = new List<string>();
+        public List<string> jointNames = new List<string>();
         public List<float> velocities = new List<float>();
     }
 }

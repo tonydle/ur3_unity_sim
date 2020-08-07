@@ -15,131 +15,131 @@ namespace Robot
     {
         // FIXED
         public float offset = 0.0f;
-        protected float _limit_min = -45;
-        protected float _limit_max = 45;
+        protected float _limitMin = -45;
+        protected float _limitMax = 45;
         protected bool _continuous = false;
-        protected string _joint_type = "revolute";
+        protected string _jointType = "revolute";
 
         // CONTROL STATUS
         protected float _position = 0;
         protected float _speed = 0;
-        protected float _desired_position = 0;
-        protected float _desired_velocity = 0;
-        protected bool _pid_control = false;
+        protected float _desiredPosition = 0;
+        protected float _desiredVelocity = 0;
+        protected bool _pidControlled = false;
 
         // POSITION PID TUNING
-        protected float _pos_pid_kp = 0;
-        protected float _pos_pid_ki = 0;
-        protected float _pos_pid_kd = 0;
-        protected float _pos_pid_cur_err = 0;
-        protected float _pos_pid_sum_err = 0;
-        protected float _pos_pid_pre_err = 0;
+        protected float _posPIDKp = 0;
+        protected float _posPIDKi = 0;
+        protected float _posPIDKd = 0;
+        protected float _posPIDCurrentError = 0;
+        protected float _posPIDSumOfErrors = 0;
+        protected float _posPIDPreviousError = 0;
 
         // WATCHDOG
-        protected float last_command_time;
-        protected float watch_dog_timeout = 1.0f; //secs
+        protected float lastCommandTime;
+        protected float watchDogTimeout = 1.0f; //secs
 
-        public bool setLimits(float min, float max) {
-            _limit_min = min + offset;
-            _limit_max = max + offset;
+        public bool SetLimits(float min, float max) {
+            _limitMin = min + offset;
+            _limitMax = max + offset;
             return true;
         }
 
-        public bool setSpeed(float speed) {
-            _pid_control = false;
+        public bool SetSpeed(float speed) {
+            _pidControlled = false;
             _speed = speed;
-            last_command_time = Time.fixedTime;
+            lastCommandTime = Time.fixedTime;
             return true;
         }
 
-        public string getJointType() {
-            return _joint_type;
+        public string GetJointType() {
+            return _jointType;
         }
 
-        public float getSpeed() {
+        public float GetSpeed() {
             return _speed;
         }
 
-        public bool setDestination(float desired_position, float desired_velocity)
+        public bool SetDestination(float desiredPosition, float desiredVelocity)
         {
-            _desired_position = desired_position + offset;
-            _desired_velocity = desired_velocity;
-            _pos_pid_cur_err = 0;
-            _pos_pid_pre_err = 0;
-            _pos_pid_sum_err = 0;
-            last_command_time = Time.fixedTime;
-            _pid_control = true;
+            _desiredPosition = desiredPosition + offset;
+            _desiredVelocity = desiredVelocity;
+            _posPIDCurrentError = 0;
+            _posPIDPreviousError = 0;
+            _posPIDSumOfErrors = 0;
+            lastCommandTime = Time.fixedTime;
+            _pidControlled = true;
             return true;
         }
 
-        public bool setDesiredPosition(float desired_position)
+        public bool SetDesiredPosition(float desiredPosition)
         {
             // do nothing, for now
             return true;
         }
 
-        public float getPosition()
+        public float GetPosition()
         {
             return _position;
         }
 
-        public bool setPosition(float position)
+        public bool SetPosition(float position)
         {
             _position = position;
             return true;
         }
 
-        public bool tunePosPID(float kp, float ki, float kd) {
-            _pos_pid_kp = kp;
-            _pos_pid_ki = ki;
-            _pos_pid_kd = kd;
+        public bool TunePosPID(float kp, float ki, float kd) {
+            _posPIDKp = kp;
+            _posPIDKi = ki;
+            _posPIDKd = kd;
             return true;
         }
 
         // Checks whether a PID control has been sent recently
-        // This is added to prevent the robot from keep moving if the final joint velocity is > 0
-        protected void watchDogCheck() {
-            if(Time.fixedTime - last_command_time > watch_dog_timeout) {
-                _pid_control = false;
+        // This was added to prevent the robot from keep moving if the final joint velocity is > 0
+        protected void WatchDogCheck() {
+            if(Time.fixedTime - lastCommandTime > watchDogTimeout) {
+                _pidControlled = false;
                 _speed = 0.0f;
             }
         }
 
-        protected void updatePosition() {
-            watchDogCheck();
+        protected void UpdatePosition() {
+            WatchDogCheck();
 
-            float temp_position;
-            if(_pid_control) {
-                _speed = _desired_velocity;
-                temp_position = _position + _speed*Time.fixedDeltaTime;
-                _pos_pid_cur_err = _desired_position - temp_position;
-                _pos_pid_sum_err += _pos_pid_cur_err;
-                float _pos_pid_dif_err = _pos_pid_cur_err - _pos_pid_pre_err;
+            float tempPosition;
+            if(_pidControlled) {
+                _speed = _desiredVelocity;
+                tempPosition = _position + _speed*Time.fixedDeltaTime;
+                _posPIDCurrentError = _desiredPosition - tempPosition;
+                _posPIDSumOfErrors += _posPIDCurrentError;
+                float _posPIDErrorDelta = _posPIDCurrentError - _posPIDPreviousError;
                 
                 // Position PID Calculation
                 // Calculate speed again
-                _speed += _pos_pid_kp*_pos_pid_cur_err + _pos_pid_ki*_pos_pid_sum_err*Time.fixedDeltaTime + _pos_pid_kd*(_pos_pid_dif_err/Time.fixedDeltaTime);
-                _pos_pid_pre_err = _pos_pid_cur_err;
-                temp_position = _position + _speed*Time.fixedDeltaTime;
+                _speed += _posPIDKp*_posPIDCurrentError + _posPIDKi*_posPIDSumOfErrors*Time.fixedDeltaTime + _posPIDKd*(_posPIDErrorDelta/Time.fixedDeltaTime);
+                _posPIDPreviousError = _posPIDCurrentError;
+                tempPosition = _position + _speed*Time.fixedDeltaTime;
             }
             else
             {
-                temp_position = _position + _speed*Time.fixedDeltaTime;
+                tempPosition = _position + _speed*Time.fixedDeltaTime;
             }
             
-            if(temp_position >= _limit_max) {
+            if(tempPosition >= _limitMax) {
                 if(_continuous) {
-                    temp_position = _limit_min + (temp_position - _limit_max);
+                    tempPosition = _limitMin + (tempPosition - _limitMax);
                 }
-                else temp_position = _limit_max;
+                else tempPosition = _limitMax;
             }
-            else if(temp_position <= _limit_min) {
+            else if(tempPosition <= _limitMin) {
                 if(_continuous) {
-                    temp_position = _limit_max - (_limit_min - temp_position);
+                    tempPosition = _limitMax - (_limitMin - tempPosition);
                 }
-                else temp_position = _limit_min;
+                else tempPosition = _limitMin;
             }
-            _position = temp_position;
+            _position = tempPosition;
         }
 
         void Start()

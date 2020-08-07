@@ -6,22 +6,22 @@ namespace Robot
 {
     public class RobotJointContinuous : RobotJoint
     {
-        private HingeJoint _hinge_joint;
+        private HingeJoint _hingeJoint;
 
         void Start()
         {
             _continuous = true;
-            _joint_type = "continuous";
-            _hinge_joint = GetComponent(typeof(HingeJoint)) as HingeJoint;
-            setLimits(-180, 180);
+            _jointType = "continuous";
+            _hingeJoint = GetComponent(typeof(HingeJoint)) as HingeJoint;
+            SetLimits(-180, 180);
         }
 
         void FixedUpdate()
         {
-            updatePosition();
-            JointSpring spr = _hinge_joint.spring;
+            UpdatePosition();
+            JointSpring spr = _hingeJoint.spring;
             spr.targetPosition = _position;
-            _hinge_joint.spring = spr;
+            _hingeJoint.spring = spr;
         }
     }
 }

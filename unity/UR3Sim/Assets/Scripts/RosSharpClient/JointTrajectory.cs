@@ -7,8 +7,8 @@ namespace Robot
 { 
     public class JointTrajectory
     {
-        public float start_time;
-        public List<string> joint_names = new List<string>();
+        public float startTime;
+        public List<string> jointNames = new List<string>();
         public List<JointTrajectoryPoint> points = new List<JointTrajectoryPoint>();
     }
 }

@@ -6,12 +6,12 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
-    public GameObject FPSController;
+    public GameObject fpsController;
 
     private FirstPersonLook firstPersonLook;
 
     private void Start() {
-        firstPersonLook = FPSController.GetComponentInChildren<FirstPersonLook>();
+        firstPersonLook = fpsController.GetComponentInChildren<FirstPersonLook>();
         Cursor.visible = false;
     }
 

@@ -9,23 +9,22 @@ namespace Robot
         public float InitialPosition;
         public float limitMax;
         public float limitMin;
-        private RosSharp.PrismaticJointLimitsManager _pris_joint_limits;
-        private ConfigurableJoint _config_joint;
+        private ConfigurableJoint _configJoint;
 
         void Start()
         {
             _continuous = false;
-            _joint_type = "prismatic";
-            _config_joint = GetComponent(typeof(ConfigurableJoint)) as ConfigurableJoint;
-            setLimits(limitMin, limitMax);
-            setPosition(InitialPosition);
+            _jointType = "prismatic";
+            _configJoint = GetComponent(typeof(ConfigurableJoint)) as ConfigurableJoint;
+            SetLimits(limitMin, limitMax);
+            SetPosition(InitialPosition);
         }
 
         void FixedUpdate()
         {
-            updatePosition();
-            Vector3 target_pos = new Vector3(_position, 0.0f, 0.0f);
-            _config_joint.targetPosition = target_pos;
+            UpdatePosition();
+            Vector3 targetPos = new Vector3(_position, 0.0f, 0.0f);
+            _configJoint.targetPosition = targetPos;
         }
     }
 }

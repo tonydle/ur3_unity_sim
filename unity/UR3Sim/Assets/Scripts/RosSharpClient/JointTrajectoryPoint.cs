@@ -9,6 +9,6 @@ namespace Robot
     {
         public List<float> positions = new List<float>();
         public List<float> velocities = new List<float>();
-        public float time_from_start;  // seconds
+        public float timeFromStart;  // seconds
     }
 }

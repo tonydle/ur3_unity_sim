@@ -39,26 +39,25 @@ namespace RosSharp.RosBridgeClient
         private void ProcessMessage()
         {
             trajectory.points.Clear();
-            trajectory.joint_names.Clear();
-            trajectory.start_time = Time.fixedTime;
+            trajectory.jointNames.Clear();
+            trajectory.startTime = Time.fixedTime;
 
             foreach (string joint in mostRecentMessage.joint_names)
             {
-                trajectory.joint_names.Add(joint);
+                trajectory.jointNames.Add(joint);
             }
 
             foreach (MessageTypes.Trajectory.JointTrajectoryPoint point in mostRecentMessage.points)
             {
-                Robot.JointTrajectoryPoint joint_traj_point = new Robot.JointTrajectoryPoint();
-                for(int i = 0; i < trajectory.joint_names.Count; i++) {
-                    joint_traj_point.positions.Add(System.Convert.ToSingle(point.positions[i]));
-                    joint_traj_point.velocities.Add(System.Convert.ToSingle(point.velocities[i]));
+                Robot.JointTrajectoryPoint jointTrajPoint = new Robot.JointTrajectoryPoint();
+                for(int i = 0; i < trajectory.jointNames.Count; i++) {
+                    jointTrajPoint.positions.Add(System.Convert.ToSingle(point.positions[i]));
+                    jointTrajPoint.velocities.Add(System.Convert.ToSingle(point.velocities[i]));
                 }
-                joint_traj_point.time_from_start = ((float)point.time_from_start.nsecs) / 1000.0f;
-                trajectory.points.Add(joint_traj_point);
+                jointTrajPoint.timeFromStart = ((float)point.time_from_start.nsecs) / 1000.0f;
+                trajectory.points.Add(jointTrajPoint);
             }
-            controller.followTrajectory(trajectory);
+            controller.FollowTrajectory(trajectory);
         }
     }
 }
-

@@ -38,17 +38,16 @@ namespace RosSharp.RosBridgeClient
 
         private void ProcessMessage()
         {
-            jointJogCmd.joint_names.Clear();
+            jointJogCmd.jointNames.Clear();
             jointJogCmd.velocities.Clear();
             foreach (string joint in mostRecentMessage.name)
             {
-                jointJogCmd.joint_names.Add(joint);
+                jointJogCmd.jointNames.Add(joint);
             }
-            for(int i = 0; i < jointJogCmd.joint_names.Count; i++) {
+            for(int i = 0; i < jointJogCmd.jointNames.Count; i++) {
                 jointJogCmd.velocities.Add(System.Convert.ToSingle(mostRecentMessage.velocity[i]));
             }
-            controller.jogRobot(jointJogCmd);
+            controller.JogRobot(jointJogCmd);
         }
     }
 }
-

@@ -35,12 +35,11 @@ namespace RosSharp.RosBridgeClient
         private void ProcessMessage()
         {
             if(mostRecentMessage.data == true) {
-                controller.stopRobot();
+                controller.StopRobot();
             }
             else {
-                controller.startRobot();
+                controller.StartRobot();
             }
         }
     }
 }
-

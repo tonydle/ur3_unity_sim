@@ -13,23 +13,23 @@ namespace RosSharp.RosBridgeClient
     public class ModifiedJointStateReader : MonoBehaviour
     {
         private UrdfJoint urdfJoint;
-        private Robot.RobotJoint _robot_joint;
+        private Robot.RobotJoint _robotJoint;
 
         private void Start()
         {
             urdfJoint = GetComponent<UrdfJoint>();
-            _robot_joint = GetComponent(typeof(Robot.RobotJoint)) as Robot.RobotJoint;
+            _robotJoint = GetComponent(typeof(Robot.RobotJoint)) as Robot.RobotJoint;
         }
 
         public void Read(out string name, out float position, out float velocity, out float effort)
         {
             name = urdfJoint.JointName;
-            if(_robot_joint.getJointType() == "prismatic") {
-                position = urdfJoint.GetPosition() + _robot_joint.offset;
+            if(_robotJoint.GetJointType() == "prismatic") {
+                position = urdfJoint.GetPosition() + _robotJoint.offset;
             }
             else {
                 position = urdfJoint.GetPosition();
-                float robotJointPosition = -(_robot_joint.getPosition()) * Mathf.Deg2Rad; 
+                float robotJointPosition = -(_robotJoint.GetPosition()) * Mathf.Deg2Rad; 
                 if (position - robotJointPosition > Mathf.PI)
                 {
                     while (position - robotJointPosition > Mathf.PI)
@@ -40,7 +40,7 @@ namespace RosSharp.RosBridgeClient
                     while (position - robotJointPosition < -Mathf.PI)
                         position += 2*Mathf.PI;
                 }
-                position += _robot_joint.offset*Mathf.Deg2Rad;
+                position += _robotJoint.offset*Mathf.Deg2Rad;
             }
             
             velocity = urdfJoint.GetVelocity();
