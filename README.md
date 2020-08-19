@@ -25,5 +25,7 @@ the [UR3Sim](https://github.com/tonydle/ur3_unity_sim/tree/master/unity/UR3Sim) 
     - **UR3** Scene: the base UR3 that can be modified for your application
     - **UR3 World** Scene: the UR3 on a table with blocks
     
+![UR3Sim](https://github.com/tonydle/ur3_unity_sim/wiki/img/ur3sim_running.jpg)
+    
 ---
 Developed by Tony Le (tony@mechatony.com)
