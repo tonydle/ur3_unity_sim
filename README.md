@@ -26,6 +26,20 @@ the [UR3Sim](https://github.com/tonydle/ur3_unity_sim/tree/master/unity/UR3Sim) 
     - **UR3 World** Scene: the UR3 on a table with blocks
     
 ![UR3Sim](https://github.com/tonydle/ur3_unity_sim/wiki/img/ur3sim_running.jpg)
+
+## Citation ##
+If you find this repository useful, please consider citing our paper:  
+
+D. T. Le, S. Sutjipto, Y. Lai and G. Paul, "Intuitive Virtual Reality based Control of a Real-world Mobile Manipulator," 2020 16th International Conference on Control, Automation, Robotics and Vision (ICARCV), 2020, pp. 767-772, doi: [10.1109/ICARCV50220.2020.9305517](https://ieeexplore.ieee.org/document/9305517).
+
+```
+@inproceedings{
+    le2020-ur3-sim,  author={Le, Dinh Tung and Sutjipto, Sheila and Lai, Yujun and Paul, Gavin},
+    booktitle={2020 16th International Conference on Control, Automation, Robotics and Vision (ICARCV)},
+    title={Intuitive Virtual Reality based Control of a Real-world Mobile Manipulator},
+    year={2020}, pages={767-772},  doi={10.1109/ICARCV50220.2020.9305517}
+}
+```
     
 ---
 Developed by Tony Le (tony@mechatony.com)
