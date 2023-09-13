@@ -42,4 +42,4 @@ D. T. Le, S. Sutjipto, Y. Lai and G. Paul, "Intuitive Virtual Reality based Cont
 ```
     
 ---
-Developed by Tony Le (tony@metatony.io)
+Developed by Tony Le (tonyle98@outlook.com)
